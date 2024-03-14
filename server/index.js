@@ -1,5 +1,5 @@
 const express = require('express');
-const verifyProof = require('../utils/verifyProof');
+const verifyProof = require('./verifyProof');
 
 const port = 1225;
 

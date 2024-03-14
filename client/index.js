@@ -1,6 +1,4 @@
 const axios = require('axios');
-const niceList = require('../utils/niceList.json');
-const MerkleTree = require('../utils/MerkleTree');
 
 const serverUrl = 'http://localhost:1225';
 
