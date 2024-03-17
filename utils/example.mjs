@@ -1,6 +1,6 @@
-const MerkleTree = require('./MerkleTree');
-const niceList = require('./niceList');
-const verifyProof = require('./verifyProof');
+import MerkleTree from './MerkleTree.mjs';
+import verifyProof from './verifyProof.mjs';
+import niceList from './niceList.json' assert { type: 'json' };
 
 // create the merkle tree for the whole nice list
 const merkleTree = new MerkleTree(niceList);

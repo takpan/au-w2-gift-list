@@ -1,29 +1,44 @@
+// Import modules
 const express = require('express');
+const cors = require("cors");
 const verifyProof = require('./verifyProof');
 
-const port = 1225;
-
+// Express
 const app = express();
+const port = 3042;
+
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-// TODO: hardcode a merkle root here representing the whole nice list
-// paste the hex string in here, without the 0x prefix
-const MERKLE_ROOT = '';
+let merkleRoot = '';
 
-app.post('/gift', (req, res) => {
-  // grab the parameters from the front-end here
-  const body = req.body;
+// Set Merkle root
+app.post('/setroot', (req, res) => {
+  const { rootHash } = req.body;
+  if (!rootHash) {
+    return res.status(400).send({ message: "No root hash value received" });
+  }
 
-  // TODO: prove that a name is in the list 
-  const isInTheList = false;
-  if(isInTheList) {
-    res.send("You got a toy robot!");
-  }
-  else {
-    res.send("You are not on the list :(");
-  }
+  merkleRoot = rootHash;
+  res.sendStatus(204);
 });
 
+// Verify git recipient
+app.post('/gift', (req, res) => {
+  const { proof, leaf } = req.body;
+
+  const isInTheList = verifyProof(proof, leaf, merkleRoot);
+  res.send({ isInTheList });
+});
+
+// Reset Merkle root
+app.get('/reset', (req, res) => {
+  merkleRoot = '';
+  res.sendStatus(204);
+});
+
+// Start the server
 app.listen(port, () => {
   console.log(`Listening on port ${port}!`);
 });

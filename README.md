@@ -1,26 +1,48 @@
 # Gift List
 
-To get started with the repository, clone it and then run `npm install` in the top-level directory to install the depedencies.
+This project serves as a simple demonstration of how Merkle trees function within a blockchain context.
 
-There are three folders in this repository:
+### Setup
 
-## Client
+To get started with the repository, clone it and then run `npm install` in both `client` and `server` directories to install the depedencies.
 
-You can run the client from the top-level directory with `node client/index`. This file is a script which will send an HTTP request to the server.
+There are three main folders in this repository:
 
-Think of the client as the _prover_ here. It needs to prove to the server that some `name` is in the `MERKLE_ROOT` on the server. 
+#### Client
 
-## Server
+The `client` directory contains a [react app](https://reactjs.org/) using [vite](https://vitejs.dev/). You can run the client with `npm run dev` command.
 
-You can run the server from the top-level directory with `node server/index`. This file is an express server which will be hosted on port 1225 and respond to the client's request.
+Think of the client as the _prover_ here. It needs to prove to the server that some `name` is in the current `merkleRoot` on the server. 
 
-Think of the server as the _verifier_ here. It needs to verify that the `name` passed by the client is in the `MERKLE_ROOT`. If it is, then we can send the gift! 
+#### Server
 
-## Utils
+The server folder contains a node.js server using [express](https://expressjs.com/). To run the server, execute the command: `node index`.
+
+The application should connect to the default server port (3042) automatically and respond to the client's requests.
+
+Think of the server as the _verifier_ here. It needs to verify that the `name` passed by the client is in the current `merkleRoot`. If it is, then we can send the gift!
+
+_Hint_ - Use [nodemon](https://www.npmjs.com/package/nodemon) instead of `node` to automatically restart the server on any changes.
+
+#### Utils
 
 There are a few files in utils:
 
 - The `niceList.json` which contains all the names of the people who deserve a gift this year (this is randomly generated, feel free to add yourself and others to this list!)
-- The `example.js` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out from the top-level folder with `node/example.js`
-- The `MerkleTree.js` should look familiar from the Merkle Tree module! This one has been modified so you should not have to deal with any crypto type conversion. You can import this in your client/server
-- The `verifyProof.js` should also look familiar. This was the last stage in the module. You can use this function to prove a name is in the merkle root, as show in the example.
+- The `example.mjs` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out with `node example.js`
+- The `MerkleTree.mjs` contains a class that helps with Merkle root and Merkle proof calcucations. It is imported in the client.
+- The `verifyProof.mjs` is used to prove that a name is in the merkle root.
+
+### Use
+
+The **Gift Recipients** container allows user to add random names (or manually specified ones) to the Merkle tree. This process mirrors the aggregation of transactions from a pool to form a block within a blockchain system. Once all desired names have been added to the tree, the root hash must be transmitted to the server for storage. This mirrors the addition of a block on the blockchain. After the root hash has been send and stored to the server, no additional names can be added to the tree.
+
+The **Merkle Tree** container displays the current state of the tree along with hash details for any selected node. The tree is updated dynamically while user adds new names in the gift list.
+
+The **Claim gift** container allows user to claim a gift for a name that has already been added to the tree. For any selected name, the Merkle proof is displayed along with the option to modify the name of the current leaf node.
+
+Clicking on the 'Claim gift' button, reveals whether the selected name is eligible to receive a gift. The Merkle proof is sent to the server, where the root hash is calculated based on this proof and compared to the stored root hash. Any modified name results in a mismatch between the calculated and stored root hash, and consequently, the gift should not be issued.
+
+![Alt text](./img/au-w2-layout.png)
+
+The project is based on the Alchemy univeristy week 2 project template: https://github.com/alchemyplatform/GiftList
