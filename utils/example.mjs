@@ -1,4 +1,4 @@
-import MerkleTree from './MerkleTree.mjs';
+import MerkleTree from '../client/src/MerkleTree.js';
 import verifyProof from './verifyProof.mjs';
 import niceList from './niceList.json' assert { type: 'json' };
 

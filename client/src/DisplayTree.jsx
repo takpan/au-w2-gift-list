@@ -1,7 +1,7 @@
 import { Tree } from 'react-d3-tree';
 import { useState, useEffect } from "react";
 import CustomNode from "./CustomNode";
-import { MerkleTree } from "../../utils/MerkleTree";
+import { MerkleTree } from "./MerkleTree";
 import uint8ObjectToHexString from "../../utils/conversions";
 
 function DisplayTree({ leaves }) {

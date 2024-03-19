@@ -1,6 +1,6 @@
 import { keccak256 } from 'ethereum-cryptography/keccak';
 import { bytesToHex } from 'ethereum-cryptography/utils';
-import uint8ObjectToHexString from "./conversions.mjs";
+import uint8ObjectToHexString from "../../utils/conversions.mjs";
 
 export class MerkleTree {
   constructor(leaves) {

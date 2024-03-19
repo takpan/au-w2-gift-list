@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import server from "./server";
-import { MerkleTree } from "../../utils/MerkleTree";
+import { MerkleTree } from "./MerkleTree";
 import niceList from "../../utils/niceList.json";
 
 function GiftRecipients({ leaves, setLeaves, rootHashSent, setRootHashSent }) {

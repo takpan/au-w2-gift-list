@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { MerkleTree } from "../../utils/MerkleTree";
+import { MerkleTree } from "./MerkleTree";
 import server from "./server";
 
 function ClaimGift({ leaves }) {

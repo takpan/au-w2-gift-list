@@ -29,7 +29,7 @@ _Hint_ - Use [nodemon](https://www.npmjs.com/package/nodemon) instead of `node` 
 There are a few files in utils:
 
 - The `niceList.json` which contains all the names of the people who deserve a gift this year (this is randomly generated, feel free to add yourself and others to this list!)
-- The `example.mjs` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out with `node example.js`
+- The `example.mjs` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out with `node example.js` (run `npm install` first to install the needed dependencies).
 - The `MerkleTree.mjs` contains a class that helps with Merkle root and Merkle proof calcucations. It is imported in the client.
 - The `verifyProof.mjs` is used to prove that a name is in the merkle root.
 
